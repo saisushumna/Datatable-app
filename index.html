@@ -162,6 +162,7 @@ table.dataTable {
           <th>Brand Name</th>
           <th>Issuing Authority</th>
           <th>Address</th>
+      
         </tr>
       </thead>
     </table>
@@ -229,14 +230,20 @@ function loadImporters() {
       { data: 'Brand Name' },
       { data: 'Issuing Authority' },
       { data: 'Address' },
+    
     ]
   });
   importerLoaded = true;
 }
 
+
+
+
+
 // Load manufacturers by default
 loadManufacturers();
-  $(document).ready(function () {
+
+$(document).ready(function () {
 
   Promise.all([
     fetch('products2_part1.json').then(r => r.json()),
@@ -263,9 +270,13 @@ loadManufacturers();
       ]
     });
 
+  });
 
+});
+</script>
 </script>
 
 </body>
 </html>
+
 
