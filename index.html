@@ -162,7 +162,6 @@ table.dataTable {
           <th>Brand Name</th>
           <th>Issuing Authority</th>
           <th>Address</th>
-          <th>Intended</th>
         </tr>
       </thead>
     </table>
@@ -230,7 +229,6 @@ function loadImporters() {
       { data: 'Brand Name' },
       { data: 'Issuing Authority' },
       { data: 'Address' },
-      { data: 'Intended' }
     ]
   });
   importerLoaded = true;
@@ -238,8 +236,36 @@ function loadImporters() {
 
 // Load manufacturers by default
 loadManufacturers();
+  $(document).ready(function () {
+
+  Promise.all([
+    fetch('products2_part1.json').then(r => r.json()),
+    fetch('products2_part2.json').then(r => r.json()),
+    fetch('products2_part3.json').then(r => r.json())
+  ]).then(allData => {
+
+    const mergedData = allData.flat();
+
+    $('#importerTable').DataTable({
+      data: mergedData,
+      autoWidth: false,
+      columns: [
+        { data: 'sno' },
+        {
+          data: 'Importer Name and address',
+          render: d => `<div class="cell-text clamp-5">${d || ""}</div>`
+        },
+        { data: 'License Number' },
+        {
+          data: 'Address',
+          render: d => `<div class="cell-text clamp-4">${d || ""}</div>`
+        },
+      ]
+    });
+
 
 </script>
 
 </body>
 </html>
+
